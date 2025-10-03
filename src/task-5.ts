@@ -1,11 +1,23 @@
-function logStatus(status: "loading" | "success" | "error"): void {
-  if (status === "loading") {
-    console.log("Loading...");
-  } else if (status === "success") {
-    console.log("Success!");
-  } else if (status === "error") {
-    console.log("Something went wrong");
-  }
+// Завдання:
+
+// Типізуйте функцію повністю: параметри і повернення функції.
+
+interface AddParamsUser {
+  name: string;
+  age: number;
+}
+interface ReturnParamsUser {
+  name: string;
+  age: number;
+  isAdmin: boolean;
 }
 
-logStatus("loading");
+function createUser({ name, age }: AddParamsUser): ReturnParamsUser {
+  return {
+    name,
+    age,
+    isAdmin: false,
+  };
+}
+
+console.log(createUser({ name: "Alice", age: 30 }));

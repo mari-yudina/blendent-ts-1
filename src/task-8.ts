@@ -1,18 +1,37 @@
-import axios from "axios";
+// Завдання:
 
-interface Post {
-  id: number;
-  title: string;
-  body: string;
+// 1. Створіть функцію getPermissions, яка приймає параметр role типу Role.
+
+// 2. Функція має повертати масив рядків, які описують права доступу для кожної ролі:
+
+// Admin має права: "create", "read", "update", "delete"
+// User має права: "read", "update"
+// Guest має лише право: "read"
+// 3. Типізуйте параметр і тип повернення функції getPermissions.
+
+// 4. Перевірте, що TypeScript не дозволяє передати в getPermissions значення, якого немає в Role.
+
+// enum Role {
+//   Admin,
+//   User,
+//   Guest,
+// }
+
+type Role = "Admin" | "User" | "Guest";
+
+function getPermissions(role: Role): string[] {
+  switch (role) {
+    case "Admin":
+      return ["create", "read", "update", "delete"];
+    case "User":
+      return ["read", "update"];
+    case "Guest":
+      return ["read"];
+
+    default:
+      return [];
+  }
 }
-
-async function fetchPosts(): Promise<Post[]> {
-  const response = await axios.get<Post[]>(
-    "https://jsonplaceholder.typicode.com/posts"
-  );
-  return response.data;
-}
-
-fetchPosts().then((posts) => {
-  console.log(posts[0].title);
-});
+console.log("getPermissions", getPermissions("Admin"));
+console.log("getPermissions", getPermissions("User"));
+console.log("getPermissions", getPermissions("Guest"));

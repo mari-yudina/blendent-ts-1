@@ -1,11 +1,26 @@
-function getFirstElement<T>(arr: T[]): T {
-  return arr[0];
+// Завдання:
+
+// Створіть тип для user.
+// Зробіть address необов язковим.
+// Перевірте, що user.address?.city не викликає помилки.
+
+interface User {
+  name: string;
+  address: Address;
 }
 
-getFirstElement<number>([1, 2, 3]); // 1
-console.log(getFirstElement<number>([1, 2, 3]));
+interface Address {
+  city: string;
+}
 
-getFirstElement<string>(["a", "b", "c"]); // "a"
-console.log(getFirstElement<string>(["a", "b", "c"]));
-getFirstElement<boolean>([true, false, true]); // true
-console.log(getFirstElement<boolean>([true, false, true]));
+const user: User = {
+  name: "Alice",
+  address: {
+    city: "Kyiv",
+  },
+};
+
+if (!user.address?.city) {
+  console.log("помилка: відсутня країна");
+}
+console.log(user.address?.city);
