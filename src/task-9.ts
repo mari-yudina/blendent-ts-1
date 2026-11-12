@@ -26,15 +26,8 @@ interface Container<T> {
   addItem: (item: T) => void;
   getItem: (index: number) => T;
 }
-
-function getLastElement<T>(container: Container<T>): T {
-  return container.length;
-}
-
-console.log("getLastElement", getLastElement(numberContainer));
-
 const numberContainer: Container<number> = {
-  items: [1, 2, 3],
+  items: [3, 5, 7],
   addItem(item) {
     this.items.push(item);
   },
@@ -42,7 +35,6 @@ const numberContainer: Container<number> = {
     return this.items[index];
   },
 };
-
 const stringContainer: Container<string> = {
   items: ["Tom", "Roy", "Bob"],
   addItem(item) {
@@ -52,9 +44,19 @@ const stringContainer: Container<string> = {
     return this.items[index];
   },
 };
-numberContainer.addItem(777);
-console.log("numberContainer", numberContainer.getItem(15));
-console.log("numberContainer", numberContainer.items);
+
+function getLastElement<T>(container: Container<T>): T {
+  return container.items[container.items.length - 1];
+}
+
+numberContainer.addItem(8);
+log(numberContainer.getItem(2));
+log(numberContainer.getItem(15)); //undefined
+stringContainer.addItem("Lena");
+log(stringContainer.getItem(2));
+
+console.log("getLastElement", getLastElement(numberContainer));
+console.log("getLastElement", getLastElement(stringContainer));
 
 console.log("stringContainer", stringContainer.getItem(1));
 console.log("stringContainer", stringContainer.items);
